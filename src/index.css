@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Acme&family=Geologica:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Permanent+Marker&family=Savate:ital,wght@0,200..900;1,200..900&family=Space+Grotesk:wght@300..700&family=Spicy+Rice&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+
+body, html, #root {
+  font-family: "PT Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.pt-sans-regular {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pt-sans-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.pt-sans-regular-italic {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.pt-sans-bold-italic {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
