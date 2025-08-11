@@ -1,15 +1,26 @@
 import React, { useContext } from "react";
 import SongContext from "../context/SongContextContext";
 import SongCard from "../components/SongCard";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function SongsList() {
-  const { songs, loading, deleteSong } = useContext(SongContext);
+  const { songs, loading, deleteSong, searchSongs } = useContext(SongContext);
+  const location = useLocation();
 
   const handleDelete = async (id) => {
     try {
       await deleteSong(id);
     } catch (err) { console.error(err); }
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const search = params.get("search") || "";
+    if (search) {
+      searchSongs(search);
+    }
+  }, [location.search]);
 
   return (
     <div className="max-w-6xl mx-auto p-8">

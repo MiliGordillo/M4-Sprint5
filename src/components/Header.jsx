@@ -1,10 +1,14 @@
 import React, { useState, useContext } from "react";
-import { FaBars, FaHome, FaMusic, FaPlus, FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaBars, FaHome, FaMusic, FaPlus, FaUserCircle, FaTimes } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import SongContext from "../context/SongContextContext";
 
 export default function Header() {
-  const [search, setSearch] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = new URLSearchParams(location.search);
+  const initialSearch = params.get("search") || "";
+  const [search, setSearch] = useState(initialSearch);
   const { searchSongs } = useContext(SongContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -12,6 +16,20 @@ export default function Header() {
     const value = e.target.value;
     setSearch(value);
     searchSongs(value);
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === "Enter" && search.trim() !== "") {
+      navigate(`/songs?search=${encodeURIComponent(search.trim())}`);
+    }
+  };
+
+  const handleClear = () => {
+    setSearch("");
+    searchSongs("");
+    if (location.pathname === "/songs") {
+      navigate("/songs");
+    }
   };
 
   const handleSidebarToggle = () => {
@@ -33,14 +51,25 @@ export default function Header() {
         </div>
 
         {/* Barra de búsqueda */}
-        <div className="flex-1 flex justify-center px-2">
+        <div className="flex-1 flex justify-center px-2 relative">
           <input
-            className="w-full max-w-[250px] sm:max-w-md px-3 py-2 rounded-full bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none text-sm sm:text-base"
+            className="w-full max-w-[250px] sm:max-w-md px-3 py-2 rounded-full bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none text-sm sm:text-base pr-8"
             type="text"
             placeholder="Search songs"
             value={search}
             onChange={handleChange}
+            onKeyDown={handleSearchKeyDown}
           />
+          {search && (
+            <button
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-base p-1 rounded-full focus:outline-none"
+              onClick={handleClear}
+              aria-label="Limpiar búsqueda"
+              type="button"
+            >
+              <FaTimes />
+            </button>
+          )}
         </div>
 
         {/* Icono usuario */}
