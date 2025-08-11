@@ -20,8 +20,8 @@ export default function SongCard({ song, onDelete }) {
   };
 
   return (
-    <article className="bg-neutral-800 rounded-xl shadow-lg p-4 flex flex-col items-center hover:bg-neutral-700 transition-colors duration-200 w-48 min-h-[220px]">
-      <img src={song.cover || "https://via.placeholder.com/100"} alt={song.title} className="w-32 h-32 object-cover rounded-lg mb-2" />
+    <article className="bg-neutral-800 rounded-xl shadow-lg p-2 sm:p-4 flex flex-col items-center hover:bg-neutral-700 transition-colors duration-200 w-full min-h-[180px] max-w-[160px] mx-auto">
+      <img src={song.cover || "https://via.placeholder.com/100"} alt={song.title} className="w-20 h-20 sm:w-28 sm:h-28 object-cover rounded-lg mb-2" />
       <div className="w-full text-center">
         <h3 className="font-bold text-white text-base truncate">{song.title}</h3>
         <p className="text-xs text-neutral-400 truncate">{song.artist} — {song.album}</p>

@@ -28,7 +28,7 @@ export default function Header() {
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Botón hamburguesa solo en móviles */}
           <button
-            className="sm:hidden text-white text-2xl focus:outline-none"
+            className="sm:hidden text-white text-xl focus:outline-none p-1"
             aria-label="Abrir menú"
             onClick={handleSidebarToggle}
           >
@@ -52,27 +52,27 @@ export default function Header() {
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 sm:hidden" onClick={handleSidebarToggle}>
           <div
-            className="absolute top-0 left-0 h-full w-64 bg-neutral-900 shadow-lg flex flex-col justify-center items-center border-r border-neutral-800"
+            className="absolute top-0 left-0 h-full w-48 bg-neutral-900 shadow-lg flex flex-col justify-center items-center border-r border-neutral-800"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Contenido del Sidebar */}
             <nav className="w-full">
-              <ul className="flex flex-col gap-6 items-center justify-center h-full">
+              <ul className="flex flex-col gap-4 items-center justify-center h-full">
                 <li>
                   <Link to="/" className="flex flex-col items-center text-neutral-400 hover:text-white text-xs" onClick={handleSidebarToggle}>
-                    <FaHome size={22} />
+                    <FaHome size={18} />
                     <span className="mt-1">Home</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/songs" className="flex flex-col items-center text-neutral-400 hover:text-white text-xs" onClick={handleSidebarToggle}>
-                    <FaMusic size={22} />
+                    <FaMusic size={18} />
                     <span className="mt-1">Songs</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/songs/create" className="flex flex-col items-center text-neutral-400 hover:text-white text-xs" onClick={handleSidebarToggle}>
-                    <FaPlus size={22} />
+                    <FaPlus size={18} />
                     <span className="mt-1">Add</span>
                   </Link>
                 </li>

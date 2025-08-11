@@ -146,12 +146,12 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-neutral-900 rounded-2xl shadow-2xl p-8 mt-8">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="max-w-md w-full mx-auto bg-neutral-900 rounded-2xl shadow-2xl p-4 sm:p-8 mt-4">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <h2 className="text-2xl font-bold text-white mb-4 text-center">Agregar / Editar Canción</h2>
 
         {/* Título y artista */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Título</label>
             <input name="title" value={form.title} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Shape of You" autoComplete="off" />
@@ -194,7 +194,7 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
         )}
 
         {/* Resto del formulario */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Álbum</label>
             <input name="album" value={form.album} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Divide" />
@@ -206,7 +206,7 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Género</label>
             <input name="genre" value={form.genre} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Pop" />
@@ -217,7 +217,7 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-2">
+  <div className="flex flex-col items-center gap-2">
           <label className="block text-sm text-neutral-300 mb-1">Portada (URL)</label>
           <input name="cover" value={form.cover} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="URL de la portada" />
           {form.cover && (
