@@ -12,13 +12,13 @@ function App() {
     <SongProvider>
       <BrowserRouter>
         <div className="flex h-screen overflow-hidden bg-neutral-900">
-          {/* Sidebar fija */}
+          {/* Sidebar solo visible en sm: */}
           <Sidebar className="fixed top-0 left-0 h-full" />
 
-          {/* Contenido principal desplazable */}
-          <div className="flex flex-col flex-1 ml-[80px] h-full">
+          {/* Contenido principal */}
+          <div className="flex flex-col flex-1 sm:ml-[80px] h-full">
             <Header />
-            <main className="flex-1 px-8 pt-8 overflow-y-auto">
+            <main className="flex-1 px-4 sm:px-8 pt-6 sm:pt-8 overflow-y-auto">
               <AppRouter />
             </main>
           </div>
@@ -42,5 +42,6 @@ function App() {
 }
 
 export default App;
+
 
 

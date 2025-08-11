@@ -43,7 +43,9 @@ export default function SongEdit() {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-4xl font-extrabold mb-8 bg-gradient-to-r from-green-400 via-green-600 to-lime-400 bg-clip-text text-transparent drop-shadow-lg animate-fade-in">Editar canción</h2>
+      <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 sm:mb-8 bg-gradient-to-r from-green-400 via-green-600 to-lime-400 bg-clip-text text-transparent">
+        Editar canción
+      </h2>
       <SongForm initial={initial} onSubmit={handleUpdate} loading={saving} />
     </div>
   );
