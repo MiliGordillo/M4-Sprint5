@@ -27,74 +27,59 @@ export default function SongDetail() {
   if (!song) return <p className="p-4">No encontrada</p>;
 
   return (
-    <div className="container mx-auto p-4 sm:p-8 flex justify-center">
-      <div className="bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 p-4 sm:p-8 flex flex-col md:flex-row gap-6 sm:gap-10 w-full max-w-3xl">
-        <div className="flex flex-col items-center">
-          <img
-            src={song.cover || "https://via.placeholder.com/300"}
-            alt={song.title}
-            className="w-full max-w-xs sm:max-w-sm object-cover rounded-xl border-4 border-green-500 shadow-lg mb-4"
-          />
+    <div className="min-h-screen bg-neutral-900 flex flex-col items-center pb-8">
+      {/* Imagen superior */}
+      <div className="w-full relative">
+        <img
+          src={song.cover || "https://via.placeholder.com/300"}
+          alt={song.title}
+          className="w-full h-64 object-cover object-center rounded-b-3xl shadow-lg"
+        />
+        {/* Botón volver */}
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-4 left-4 bg-black/60 text-white rounded-full p-2 text-lg hover:bg-black/80"
+        >
+          ←
+        </button>
+      </div>
+
+      {/* Info principal */}
+      <div className="w-full max-w-md px-4 -mt-12 relative z-10">
+        <div className="bg-neutral-900 rounded-2xl shadow-xl p-4 flex flex-col items-center">
+          <h2 className="text-3xl font-extrabold mb-2 text-white text-center drop-shadow-lg">{song.title}</h2>
+          <p className="text-base text-neutral-300 font-semibold mb-2 text-center">{song.artist}</p>
+          <div className="flex items-center gap-2 mb-4">
+            <span className="bg-neutral-800 text-white text-xs font-bold px-3 py-1 rounded-full">{song.year ?? "—"}</span>
+            <span className="bg-neutral-800 text-white text-xs font-bold px-3 py-1 rounded-full">{song.genre ?? "—"}</span>
+          </div>
           {song.audioUrl && (
-            <audio
-              controls
-              src={song.audioUrl}
-              className="w-full max-w-xs mt-2"
-            />
+            <audio controls src={song.audioUrl} className="w-full mt-2" />
           )}
         </div>
-
-        <div className="flex-1">
-          <h2 className="text-3xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-green-400 via-green-600 to-lime-400 bg-clip-text text-transparent">
-            {song.title}
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-300 font-semibold mb-2">
-            {song.artist}
-          </p>
-          <div className="space-y-2 mb-6 text-sm sm:text-base">
-            <p>
-              <span className="font-bold text-gray-400">Álbum:</span>{" "}
-              <span className="text-white">{song.album || "—"}</span>
-            </p>
-            <p>
-              <span className="font-bold text-gray-400">Año:</span>{" "}
-              <span className="text-white">{song.year ?? "—"}</span>
-            </p>
-            <p>
-              <span className="font-bold text-gray-400">Género:</span>{" "}
-              <span className="text-white">{song.genre ?? "—"}</span>
-            </p>
-          </div>
-
-          {/* BOTONES MEJORADOS */}
-          <div className="flex flex-col sm:flex-row gap-3 mt-6">
-            <Link
-              to={`/songs/${song.id}/edit`}
-              className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
-            >
-              <FaEdit className="text-lg" />
-              Editar
-            </Link>
-
-            <button
-              onClick={async () => {
-                setLoadingDelete(true);
-                try {
-                  await deleteSong(song.id);
-                  navigate("/songs");
-                } finally {
-                  setLoadingDelete(false);
-                }
-              }}
-              disabled={loadingDelete}
-              className={`flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-                loadingDelete ? "opacity-60 cursor-not-allowed" : ""
-              }`}
-            >
-              <FaTrash className="text-lg" />
-              {loadingDelete ? "Eliminando..." : "Eliminar"}
-            </button>
-          </div>
+        {/* Botones de acción */}
+        <div className="flex gap-3 mt-6 justify-center">
+          <Link
+            to={`/songs/${song.id}/edit`}
+            className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1ED760] text-black font-semibold shadow hover:bg-[#19b954] transition"
+          >
+            Editar
+          </Link>
+          <button
+            onClick={async () => {
+              setLoadingDelete(true);
+              try {
+                await deleteSong(song.id);
+                navigate("/songs");
+              } finally {
+                setLoadingDelete(false);
+              }
+            }}
+            disabled={loadingDelete}
+            className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition ${loadingDelete ? "opacity-60 cursor-not-allowed" : ""}`}
+          >
+            {loadingDelete ? "Eliminando..." : "Eliminar"}
+          </button>
         </div>
       </div>
     </div>

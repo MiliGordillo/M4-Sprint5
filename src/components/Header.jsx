@@ -52,24 +52,27 @@ export default function Header() {
 
         {/* Barra de búsqueda */}
         <div className="flex-1 flex justify-center px-2 relative">
-          <input
-            className="w-full max-w-[250px] sm:max-w-md px-3 py-2 rounded-full bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none text-sm sm:text-base pr-8"
-            type="text"
-            placeholder="Search songs"
-            value={search}
-            onChange={handleChange}
-            onKeyDown={handleSearchKeyDown}
-          />
-          {search && (
-            <button
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-base p-1 rounded-full focus:outline-none"
-              onClick={handleClear}
-              aria-label="Limpiar búsqueda"
-              type="button"
-            >
-              <FaTimes />
-            </button>
-          )}
+          <div className="relative w-full max-w-[250px] sm:max-w-md">
+            <input
+              className="w-full px-3 py-2 rounded-full bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none text-sm sm:text-base pr-8"
+              type="text"
+              placeholder="Search songs"
+              value={search}
+              onChange={handleChange}
+              onKeyDown={handleSearchKeyDown}
+            />
+            {search && (
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-base p-1 rounded-full focus:outline-none"
+                onClick={handleClear}
+                aria-label="Limpiar búsqueda"
+                type="button"
+                tabIndex={0}
+              >
+                <FaTimes />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Icono usuario */}
@@ -85,7 +88,7 @@ export default function Header() {
           onClick={handleSidebarToggle}
         >
           <div
-            className="absolute top-0 left-0 h-full w-48 bg-neutral-900 shadow-lg flex flex-col justify-center items-center border-r border-neutral-800"
+            className="absolute top-0 left-0 h-full w-15 bg-neutral-900 shadow-lg flex flex-col justify-center items-center border-r border-neutral-800"
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="w-full">
