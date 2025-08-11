@@ -64,7 +64,7 @@ export default function SongDetail() {
             to={`/songs/${song.id}/edit`}
             className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1ED760] text-black font-semibold shadow hover:bg-[#19b954] transition"
           >
-            Editar
+            Edit
           </Link>
           <button
             onClick={async () => {
@@ -79,7 +79,7 @@ export default function SongDetail() {
             disabled={loadingDelete}
             className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition ${loadingDelete ? "opacity-60 cursor-not-allowed" : ""}`}
           >
-            {loadingDelete ? "Eliminando..." : "Eliminar"}
+            {loadingDelete ? "eliminating..." : "Delete"}
           </button>
         </div>
       </div>
