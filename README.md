@@ -1,13 +1,27 @@
-# React + Vite
+# My Songs App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para gestionar canciones, desarrollada con React, Vite y Tailwind CSS.
 
-Currently, two official plugins are available:
+## Características principales
+- Listado de canciones con detalles (título, artista, año, género, portada y audio).
+- Crear, editar y eliminar canciones.
+- Navegación entre páginas usando React Router.
+- Estilos modernos y responsivos con Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Estructura del proyecto
+- `src/components/`: Componentes reutilizables (Header, Sidebar, SongCard, SongForm).
+- `src/pages/`: Páginas principales (Home, SongList, SongDetail, SongCreate, SongEdit, NotFound).
+- `src/context/`: Contexto global para gestión de canciones.
+- `src/service/api.js`: Funciones para interactuar con la API.
+- `public/`: Archivos estáticos y recursos.
 
-## Expanding the ESLint configuration
+## Uso
+- Accede a la app en `https://myfavssong.netlify.app`.
+- Navega, crea, edita y elimina canciones fácilmente.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# M4-Sprint5
+## Tecnologías utilizadas
+- React
+- Vite
+- Tailwind CSS
+- React Router
+
