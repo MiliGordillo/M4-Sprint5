@@ -25,7 +25,7 @@ function App() {
         </div>
 
         <ToastContainer
-          position="top-right"
+          position= "bottom-right"
           autoClose={2500}
           toastClassName={() =>
             "bg-neutral-900 text-white rounded-lg shadow-lg border border-neutral-800 px-4 py-3"

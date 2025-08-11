@@ -24,14 +24,14 @@ export default function SongCard({ song, onDelete }) {
 
   const handleDelete = async () => {
     const result = await Swal.fire({
-      title: '¿Eliminar canción?',
+      title: '¿Delete Song?',
       text: `${song.title} — ${song.artist}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#22c55e',
       cancelButtonColor: '#64748b',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel',
       background: '#18181b',
       color: '#fff',
     });
@@ -67,9 +67,9 @@ export default function SongCard({ song, onDelete }) {
           ref={menuRef}
           className="absolute top-10 right-2 bg-neutral-900 rounded-lg shadow-xl p-2 z-10 flex flex-col min-w-[110px] border border-neutral-700"
         >
-          <Link to={`/songs/${song.id}`} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition">Ver</Link>
-          <button onClick={() => { setMenuVisible(false); navigate(`/songs/${song.id}/edit`); }} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition text-left">Editar</button>
-          <button onClick={() => { setMenuVisible(false); handleDelete(); }} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition text-left">Eliminar</button>
+          <Link to={`/songs/${song.id}`} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition">See</Link>
+          <button onClick={() => { setMenuVisible(false); navigate(`/songs/${song.id}/edit`); }} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition text-left">Edit</button>
+          <button onClick={() => { setMenuVisible(false); handleDelete(); }} className="block text-xs text-white hover:bg-[#1ED760] p-2 rounded transition text-left">Delete</button>
         </div>
       )}
     </article>

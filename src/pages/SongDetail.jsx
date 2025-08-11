@@ -12,19 +12,20 @@ export default function SongDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (loadingDelete) return;
     (async () => {
       try {
-        const data = await getSong(id);
+        const data = await getSong(id, false);
         setSong(data);
       } catch (err) {
         console.error(err);
       }
       setLoading(false);
     })();
-  }, [id, getSong]);
+  }, [id, getSong, loadingDelete]);
 
-  if (loading) return <p className="p-4">Cargando...</p>;
-  if (!song) return <p className="p-4">No encontrada</p>;
+  if (loading) return <p className="p-4">loading...</p>;
+  if (!song && !loadingDelete) return <p className="p-4">No results</p>;
 
   return (
     <div className="min-h-screen bg-neutral-900 flex flex-col items-center pb-8">

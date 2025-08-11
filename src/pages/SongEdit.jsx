@@ -28,23 +28,23 @@ export default function SongEdit() {
       if (updated && updated.id) {
         navigate(`/songs/${id}`);
       } else {
-        window.toast && window.toast.error("No se pudo redirigir, intente nuevamente.");
+        window.toast && window.toast.error("Failed to redirect, please try again.");
       }
     } catch (err) {
-      window.toast && window.toast.error("Error al editar la canción");
+      window.toast && window.toast.error("Error updating song");
       console.error(err);
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) return <p className="p-4">Cargando...</p>;
-  if (!initial) return <p className="p-4">No encontrada</p>;
+  if (loading) return <p className="p-4">loading...</p>;
+  if (!initial) return <p className="p-4">No results</p>;
 
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 sm:mb-8 bg-gradient-to-r from-green-400 via-green-600 to-lime-400 bg-clip-text text-transparent">
-        Editar canción
+        Edit song
       </h2>
       <SongForm initial={initial} onSubmit={handleUpdate} loading={saving} />
     </div>

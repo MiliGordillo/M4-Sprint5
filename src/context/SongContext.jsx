@@ -13,7 +13,7 @@ const SongProvider = ({ children }) => {
       const res = await api.get(`/songs?search=${query}`);
       setSongs(res.data);
     } catch (err) {
-      toast.error("Error al buscar canciones");
+      toast.error("Error when fetching songs");
       console.error(err);
     } finally {
       setLoading(false);
@@ -26,19 +26,20 @@ const SongProvider = ({ children }) => {
       const res = await api.get("/songs");
       setSongs(res.data);
     } catch (err) {
-      toast.error("Error al cargar canciones");
+      toast.error("Error when fetching songs");
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const getSong = async (id) => {
+  // El toast de error solo se muestra si showErrorToast es true (por defecto false)
+  const getSong = async (id, showErrorToast = false) => {
     try {
       const res = await api.get(`/songs/${id}`);
       return res.data;
     } catch (err) {
-      toast.error("No se pudo obtener la canción.");
+      if (showErrorToast) toast.error("The song could not be obtained");
       throw err;
     }
   };
@@ -47,10 +48,10 @@ const SongProvider = ({ children }) => {
     try {
       const res = await api.post("/songs", payload);
       setSongs(prev => [...prev, res.data]);
-      toast.success("Canción creada");
+      toast.success("Song created successfully");
       return res.data;
     } catch (err) {
-      toast.error("Error creando canción");
+      toast.error("Error creating song");
       throw err;
     }
   };
@@ -59,10 +60,10 @@ const SongProvider = ({ children }) => {
     try {
       const res = await api.put(`/songs/${id}`, payload);
       setSongs(prev => prev.map(s => (s.id === id ? res.data : s)));
-      toast.success("Canción actualizada");
+      toast.success("Song updated successfully");
       return res.data;
     } catch (err) {
-      toast.error("Error actualizando canción");
+      toast.error("Error updating song");
       throw err;
     }
   };
@@ -71,9 +72,9 @@ const SongProvider = ({ children }) => {
     try {
       await api.delete(`/songs/${id}`);
       setSongs(prev => prev.filter(s => s.id !== id));
-      toast.success("Canción eliminada");
+      toast.success("Song deleted successfully");
     } catch (err) {
-      toast.error("Error eliminando canción");
+      toast.error("Error deleting song");
       throw err;
     }
   };

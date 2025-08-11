@@ -148,7 +148,6 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
   return (
     <div className="max-w-md w-full mx-auto bg-neutral-900 rounded-2xl shadow-2xl p-4 sm:p-8 mt-4">
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <h2 className="text-2xl font-bold text-white mb-4 text-center">Agregar / Editar Canción</h2>
 
         {/* Título y artista */}
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
