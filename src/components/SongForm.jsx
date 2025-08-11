@@ -225,10 +225,20 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
         </div>
 
         <div className="flex gap-4 justify-center mt-6">
-          <button type="submit" className="bg-gradient-to-r from-green-500 to-lime-500 text-white px-6 py-2 rounded-lg font-semibold shadow-lg hover:scale-105 transition-transform disabled:opacity-50" disabled={loading}>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1ED760] text-black font-semibold shadow hover:bg-[#19b954] transition ${loading ? "opacity-60 cursor-not-allowed" : ""}`}
+          >
             {loading ? "Guardando..." : "Guardar"}
           </button>
-          <button type="button" onClick={() => window.history.back()} className="px-6 py-2 rounded-lg border border-neutral-700 text-neutral-300 hover:bg-neutral-800 transition-colors">Cancelar</button>
+          <button
+            type="button"
+            onClick={() => window.history.back()}
+            className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition"
+          >
+            Cancelar
+          </button>
         </div>
       </form>
     </div>
