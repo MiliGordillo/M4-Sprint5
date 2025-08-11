@@ -152,22 +152,22 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
         {/* Título y artista */}
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm text-neutral-300 mb-1">Título</label>
-            <input name="title" value={form.title} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Shape of You" autoComplete="off" />
+            <label className="block text-sm text-neutral-300 mb-1">Title</label>
+            <input name="title" value={form.title} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ex: Shape of You" autoComplete="off" />
             {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
           </div>
           <div>
-            <label className="block text-sm text-neutral-300 mb-1">Artista</label>
-            <input name="artist" value={form.artist} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Ed Sheeran" autoComplete="off" />
+            <label className="block text-sm text-neutral-300 mb-1">Artist</label>
+            <input name="artist" value={form.artist} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ex: Ed Sheeran" autoComplete="off" />
             {errors.artist && <p className="text-red-500 text-xs mt-1">{errors.artist}</p>}
           </div>
         </div>
 
         {/* Resultados */}
-        {searching && <div className="text-neutral-400 text-sm mb-2">Buscando canciones...</div>}
+        {searching && <div className="text-neutral-400 text-sm mb-2">searching for songs...</div>}
         {searchResults.length > 0 && (
           <div className="bg-neutral-800 rounded-lg shadow p-4 mb-4">
-            <div className="text-neutral-300 text-sm mb-2">Elige una canción de los resultados:</div>
+            <div className="text-neutral-300 text-sm mb-2">Choose a song from the results.:</div>
             <ul className="divide-y divide-neutral-700">
               {searchResults.map((track, idx) => (
                 <li key={idx} className="py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-700 rounded transition" onClick={() => handleSelectTrack(track)}>
@@ -175,12 +175,12 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
                     (() => {
                       const imgUrl = track.image.find(img => img.size === "medium")?.['#text'] || track.image[0]['#text'];
                       if (!imgUrl || imgUrl.includes('noimage') || imgUrl.includes('2a96cbd8b46e442fc41c2b86b821562e')) {
-                        return <div className="w-10 h-10 flex items-center justify-center bg-neutral-700 rounded text-xs text-neutral-400">Sin portada</div>;
+                        return <div className="w-10 h-10 flex items-center justify-center bg-neutral-700 rounded text-xs text-neutral-400">no cover</div>;
                       }
                       return <img src={imgUrl} alt="cover" className="w-10 h-10 object-cover rounded" />;
                     })()
                   ) : (
-                    <div className="w-10 h-10 flex items-center justify-center bg-neutral-700 rounded text-xs text-neutral-400">Sin portada</div>
+                    <div className="w-10 h-10 flex items-center justify-center bg-neutral-700 rounded text-xs text-neutral-400">no cover</div>
                   )}
                   <div>
                     <div className="text-white font-semibold">{track.name}</div>
@@ -195,30 +195,30 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
         {/* Resto del formulario */}
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm text-neutral-300 mb-1">Álbum</label>
-            <input name="album" value={form.album} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Divide" />
+            <label className="block text-sm text-neutral-300 mb-1">Album</label>
+            <input name="album" value={form.album} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ex: Divide" />
           </div>
           <div>
-            <label className="block text-sm text-neutral-300 mb-1">Año</label>
-            <input name="year" value={form.year ?? ""} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: 2017" />
+            <label className="block text-sm text-neutral-300 mb-1">Year</label>
+            <input name="year" value={form.year ?? ""} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ex: 2017" />
             {errors.year && <p className="text-red-500 text-xs mt-1">{errors.year}</p>}
           </div>
         </div>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm text-neutral-300 mb-1">Género</label>
-            <input name="genre" value={form.genre} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ej: Pop" />
+            <label className="block text-sm text-neutral-300 mb-1">Genre</label>
+            <input name="genre" value={form.genre} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Ex: Pop" />
           </div>
           <div>
             <label className="block text-sm text-neutral-300 mb-1">Audio (URL)</label>
-            <input name="audioUrl" value={form.audioUrl} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="URL del audio" />
+            <input name="audioUrl" value={form.audioUrl} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Audio URL" />
           </div>
         </div>
 
   <div className="flex flex-col items-center gap-2">
-          <label className="block text-sm text-neutral-300 mb-1">Portada (URL)</label>
-          <input name="cover" value={form.cover} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="URL de la portada" />
+          <label className="block text-sm text-neutral-300 mb-1">Cover(URL)</label>
+          <input name="cover" value={form.cover} onChange={handleChange} className="w-full border-none rounded-lg px-4 py-2 bg-neutral-800 text-white focus:ring-2 focus:ring-green-500" placeholder="Cover URL" />
           {form.cover && (
             <img src={form.cover} alt="Portada" className="mt-2 rounded-lg shadow-lg w-32 h-32 object-cover border-2 border-green-500" />
           )}
@@ -228,19 +228,20 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
           <button
             type="submit"
             disabled={loading}
-            className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1ED760] text-black font-semibold shadow hover:bg-[#19b954] transition ${loading ? "opacity-60 cursor-not-allowed" : ""}`}
+            className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1ED760] text-black font-semibold shadow hover:bg-[#19b954] transition ${loading ? "opacity-60 cursor-not-allowed" : "" }`}
           >
-            {loading ? "Guardando..." : "Guardar"}
+            {loading ? "Saving..." : "Save"}
           </button>
           <button
             type="button"
             onClick={() => window.history.back()}
             className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition"
           >
-            Cancelar
+            Cancel
           </button>
         </div>
       </form>
     </div>
   );
 }
+ 
