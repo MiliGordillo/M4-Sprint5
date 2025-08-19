@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+
+import { searchTracksLastfm, fetchTrackCoverLastfm } from "../service/api";
+import Swal from "sweetalert2";
 
 export default function SongForm({ initial = {}, onSubmit, loading = false }) {
-  const API_KEY = "5ad5ef65c83337287b2aa09442b0a072";
+
 
   const [form, setForm] = useState({
     title: "",
@@ -48,7 +50,7 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
       if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
       debounceTimeout.current = setTimeout(() => {
         searchTracks({ ...form, [name]: value });
-      }, 500); // Espera 500ms después de que el usuario deja de tipear
+      }, 500);
     }
   };
 
@@ -59,21 +61,8 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
     }
     setSearching(true);
     try {
-      // Buscar resultados para elegir
-      const res = await axios.get("https://ws.audioscrobbler.com/2.0/", {
-        params: {
-          method: "track.search",
-          api_key: API_KEY,
-          track: data.title,
-          artist: data.artist,
-          format: "json",
-          limit: 5
-        }
-      });
-      const tracks = res.data?.results?.trackmatches?.track || [];
-      setSearchResults(Array.isArray(tracks) ? tracks : [tracks]);
-
-      // Buscar portada automáticamente si no hay ya una
+      const tracks = await searchTracksLastfm({ title: data.title, artist: data.artist });
+      setSearchResults(tracks);
       if (!form.cover) {
         await fetchCover(data.artist, data.title);
       }
@@ -85,49 +74,14 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
   };
 
   const fetchCover = async (artist, title) => {
-    try {
-      const infoRes = await axios.get("https://ws.audioscrobbler.com/2.0/", {
-        params: {
-          method: "track.getInfo",
-          api_key: API_KEY,
-          artist,
-          track: title,
-          format: "json"
-        }
-      });
-      let images = infoRes.data?.track?.album?.image || infoRes.data?.track?.image;
-      if (images?.length > 0) {
-        const large = images.find(img => img.size === "extralarge") || images[images.length - 1];
-        if (large && large["#text"] && !large["#text"].includes("noimage") && !large["#text"].includes("2a96cbd8b46e442fc41c2b86b821562e")) {
-          setForm(f => ({ ...f, cover: large["#text"] }));
-        }
-      }
-    } catch {
-      // Si falla, no modificar cover
+    const coverUrl = await fetchTrackCoverLastfm(artist, title);
+    if (coverUrl) {
+      setForm(f => ({ ...f, cover: coverUrl }));
     }
   };
 
   const handleSelectTrack = async (track) => {
-    let coverUrl = "";
-    try {
-      const infoRes = await axios.get("https://ws.audioscrobbler.com/2.0/", {
-        params: {
-          method: "track.getInfo",
-          api_key: API_KEY,
-          artist: track.artist,
-          track: track.name,
-          format: "json"
-        }
-      });
-      let images = infoRes.data?.track?.album?.image || infoRes.data?.track?.image;
-      if (images?.length > 0) {
-        const large = images.find(img => img.size === "extralarge") || images[images.length - 1];
-        if (large && large["#text"] && !large["#text"].includes("noimage") && !large["#text"].includes("2a96cbd8b46e442fc41c2b86b821562e")) {
-          coverUrl = large["#text"];
-        }
-      }
-    } catch {}
-
+    const coverUrl = await fetchTrackCoverLastfm(track.artist, track.name);
     setForm(f => ({
       ...f,
       title: track.name || f.title,
@@ -138,9 +92,37 @@ export default function SongForm({ initial = {}, onSubmit, loading = false }) {
     setSearchResults([]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
+    // Comprobar si hay cambios respecto a initial SOLO en los campos relevantes
+    const fields = ["title", "artist", "album", "year", "genre", "cover", "audioUrl"];
+    let changed = false;
+    for (const key of fields) {
+      const initialValue = initial[key] ?? "";
+      const formValue = key === "year"
+        ? (form[key] ? Number(form[key]) : "")
+        : (form[key] ?? "");
+      if (initialValue !== formValue) {
+        changed = true;
+        break;
+      }
+    }
+    if (!changed) {
+      await Swal.fire({
+        icon: "info",
+        title: "No changes",
+        text: "Cannot save because no changes were made.",
+        confirmButtonColor: '#22c55e',
+        background: '#18181b',
+        color: '#fff',
+        customClass: {
+          popup: 'rounded-xl',
+          confirmButton: 'bg-green-500 text-black font-bold',
+        }
+      });
+      return;
+    }
     const payload = { ...form, year: form.year ? Number(form.year) : null };
     onSubmit(payload);
   };

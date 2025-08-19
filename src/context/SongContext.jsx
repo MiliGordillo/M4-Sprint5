@@ -33,7 +33,6 @@ const SongProvider = ({ children }) => {
     }
   };
 
-  // El toast de error solo se muestra si showErrorToast es true (por defecto false)
   const getSong = async (id, showErrorToast = false) => {
     try {
       const res = await api.get(`/songs/${id}`);

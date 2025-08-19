@@ -74,11 +74,6 @@ export default function Header() {
             )}
           </div>
         </div>
-
-        {/* Icono usuario */}
-        <div className="flex items-center gap-4 sm:gap-6">
-          <FaUserCircle size={26} className="text-white" />
-        </div>
       </header>
 
       {/* Sidebar Drawer móvil */}
