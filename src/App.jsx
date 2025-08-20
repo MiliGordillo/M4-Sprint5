@@ -1,6 +1,6 @@
 import React from "react";
 import AppRouter from "./Router/AppRouter";
-import SongProvider from "./context/SongContext";
+import { SongProvider } from "./context/SongContext.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./components/Sidebar";

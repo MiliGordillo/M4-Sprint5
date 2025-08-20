@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FaBars, FaHome, FaMusic, FaPlus, FaUserCircle, FaTimes } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import SongContext from "../context/SongContextContext";
+import { SongContext } from "../context/SongContext";
 
 export default function Header() {
   const location = useLocation();

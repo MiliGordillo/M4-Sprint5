@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import SongContext from "../context/SongContextContext";
+import { SongContext } from "../context/SongContext";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
 

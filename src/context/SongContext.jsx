@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import SongContext from "./SongContextContext";
+import React, { createContext, useState, useEffect } from "react";
 import api from "../service/api";
 import { toast } from "react-toastify";
+
+const SongContext = createContext();
 
 const SongProvider = ({ children }) => {
   const [songs, setSongs] = useState([]);
@@ -98,4 +99,4 @@ const SongProvider = ({ children }) => {
   );
 };
 
-export default SongProvider;
+export { SongProvider, SongContext };

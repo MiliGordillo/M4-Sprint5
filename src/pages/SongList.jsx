@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import SongContext from "../context/SongContextContext";
+import { SongContext } from "../context/SongContext";
 import SongCard from "../components/SongCard";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
